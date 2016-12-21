@@ -2,14 +2,15 @@
 use yii\widgets\LinkPager;
 ?>
 <link href="/css/main.css" rel="stylesheet" type="text/css" />
-<form class="form-inline" role="form" method="post">
+<form class="form-inline" role="form" method="get">
+    <input type="hidden" name="r" value="contestant/index">
     <div class="form-group">
         <span>选手名称：</span>
-        <input type="text" class="form-control" name="Contestant[contestantName]" placeholder="按选手名称搜索" value="<?=$contestantName ? $contestantName : ''?>">
+        <input type="text" class="form-control" name="contestantName" placeholder="按选手名称搜索" value="<?=isset($where['contestantName']) ? $where['contestantName'] : ''?>">
     </div>
     <div class="form-group">
         <span>活动名称：</span>
-        <input type="text" class="form-control" name="Contestant[name]" placeholder="按活动名称搜索" value="<?=$name ? $name : ''?>">
+        <input type="text" class="form-control" name="name" placeholder="按活动名称搜索" value="<?=isset($where['name']) ? $where['name'] : ''?>">
     </div>
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search">搜索</span></button>
 </form>

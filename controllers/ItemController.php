@@ -28,7 +28,7 @@ class ItemController extends SiteController
         $model = new Item();
         if(Yii::$app->request->get('itemId')){
             $model = $model->findOne(Yii::$app->request->get('itemId'));
-            if(empty($model)){
+            if($model == null){
                 throw new CHttpException();
             }
         }

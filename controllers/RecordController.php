@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
 use app\models\Record;
 
 class RecordController extends SiteController
@@ -10,6 +9,8 @@ class RecordController extends SiteController
     
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new Record();
+        $record = $model->getRecord();
+        return $this->render('index',['record'=>$record]);
     }
 }

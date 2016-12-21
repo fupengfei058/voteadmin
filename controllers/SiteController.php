@@ -46,11 +46,6 @@ class SiteController extends Controller
         ];
     }
 
-    /* public function actionIndex()
-    {
-        return $this->render('/item/index');
-    } */
-    
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
