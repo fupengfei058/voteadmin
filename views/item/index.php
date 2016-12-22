@@ -38,6 +38,9 @@
                          <a type="button" class="btn btn-primary" href="./index.php?r=item/itemform&itemId=<?=$v['itemId']?>">
                             <span class="glyphicon glyphicon-list btn-icon"></span>&nbsp;编辑
                         </a>
+                        <a type="button" class="btn btn-danger" onclick="return confirm('是否确认删除？');" href="./index.php?r=item/delete-item&itemId=<?=$v['itemId']?>">
+                            <span class="glyphicon glyphicon-remove btn-icon"></span>&nbsp;删除
+                        </a>
                     </div>
                     </td>
                 </tr>
@@ -47,3 +50,25 @@
         </table>
     </div>
 </div>
+<?php /*$this->beginBlock('item') */?><!--
+$(".btn-danger").click(function(){
+    var itemId = $(this).attr("itemId");
+    if(confirm('是否确认删除？')){
+        $.ajax(function(){
+            url:'./index.php?r=item/delete-item',
+            type:'post',
+            dataType:'json',
+            data:{itemId:itemId},
+            success:function(data){
+                if(data.code == -1){
+                    alert(data.message);
+                }
+            },
+            error:function(){
+                alert('删除失败！');
+            },
+        });
+    }
+});
+<?php /*$this->endBlock() */?>
+--><?php /*$this->registerJs($this->blocks['item']); */?>

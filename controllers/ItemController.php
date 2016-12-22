@@ -13,7 +13,7 @@ class ItemController extends SiteController
     public function actionIndex()
     {
         $item = Item::find()
-        ->where(1)
+        ->where('itemState=1')
         ->orderBy('itemId')
         ->asArray()
         ->all();
@@ -29,14 +29,26 @@ class ItemController extends SiteController
         if(Yii::$app->request->get('itemId')){
             $model = $model->findOne(Yii::$app->request->get('itemId'));
             if($model == null){
-                throw new CHttpException();
+                return $this->redirect('index');
             }
         }
         if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post())){
             $model->save();
-            $this->redirect('./index.php?r=item/index');
+            return $this->redirect('index');
         }
         return $this->render('itemform',['model' => $model]);
+    }
+
+    public function actionDeleteItem()
+    {
+        if(Yii::$app->request->get('itemId')){
+            $itemId = Yii::$app->request->get('itemId');
+            $item = Item::find()->where('itemId = :itemId',[':itemId' => $itemId])->one();
+            $item->itemState = 0;
+            if($item->save()){
+                return $this->redirect('./index.php?r=item/index');
+            }
+        }
     }
 
 }
