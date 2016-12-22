@@ -1,3 +1,4 @@
+<?php use yii\helpers\Url;?>
 <link href="/css/main.css" rel="stylesheet" type="text/css" />
 <a type="button" class="btn btn-primary" href="./index.php?r=item/itemform">
     <span class="glyphicon"></span>创建活动
@@ -35,6 +36,7 @@
                     <td><?php echo $v['contestantCount']?></td>
                     <td>
                     <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default itemModal" data-toggle="modal" data-target="#myModal" itemId="<?=$v['itemId']?>"><span class="glyphicon glyphicon-search">查看链接</span></button>
                          <a type="button" class="btn btn-primary" href="./index.php?r=item/itemform&itemId=<?=$v['itemId']?>">
                             <span class="glyphicon glyphicon-list btn-icon"></span>&nbsp;编辑
                         </a>
@@ -50,25 +52,40 @@
         </table>
     </div>
 </div>
-<?php /*$this->beginBlock('item') */?><!--
-$(".btn-danger").click(function(){
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">查看链接</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    链接地址：<span id="link"></span><?=\Yii::$app->params['hostSuffix']?>
+                </p>
+                <p>
+                    二维码：<div id="qrcode"></div><!--<img id="qrcode" src="<?/*= Url::to(['item/qrcode'])*/?>">-->
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $this->beginBlock('item') ?>
+$(".itemModal").click(function(){
     var itemId = $(this).attr("itemId");
-    if(confirm('是否确认删除？')){
-        $.ajax(function(){
-            url:'./index.php?r=item/delete-item',
-            type:'post',
-            dataType:'json',
-            data:{itemId:itemId},
-            success:function(data){
-                if(data.code == -1){
-                    alert(data.message);
-                }
-            },
-            error:function(){
-                alert('删除失败！');
-            },
-        });
-    }
+    $("#link").text(itemId);
+    $.ajax(function(){
+        url:'./index.php?r=item/qrcode',
+        type:'post',
+        dataType:'json',
+        data:{itemId:itemId},
+        success:function(data){
+            $("#qrcode").html('<img src="+data+">');
+        }
+    });
 });
-<?php /*$this->endBlock() */?>
---><?php /*$this->registerJs($this->blocks['item']); */?>
+<?php $this->endBlock() ?>
+<?php $this->registerJs($this->blocks['item']); ?>

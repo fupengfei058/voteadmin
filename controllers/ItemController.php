@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Contestant;
 use app\models\Item;
+use dosamigos\qrcode\QrCode;
 
 class ItemController extends SiteController
 {
@@ -29,12 +30,12 @@ class ItemController extends SiteController
         if(Yii::$app->request->get('itemId')){
             $model = $model->findOne(Yii::$app->request->get('itemId'));
             if($model == null){
-                return $this->redirect('index');
+                return $this->redirect('./index.php?r=item/index');
             }
         }
         if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post())){
             $model->save();
-            return $this->redirect('index');
+            return $this->redirect('./index.php?r=item/index');
         }
         return $this->render('itemform',['model' => $model]);
     }
@@ -48,6 +49,14 @@ class ItemController extends SiteController
             if($item->save()){
                 return $this->redirect('./index.php?r=item/index');
             }
+        }
+    }
+
+    public function actionQrcode()
+    {
+        if($_POST['itemId']){
+            $url = $_POST['itemId'].\Yii::$app->params['hostSuffix'];
+            return QrCode::png($url,false,0,5);
         }
     }
 

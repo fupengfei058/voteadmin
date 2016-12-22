@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e12ef53556ae07324b78672a14bb6a6e",
-    "content-hash": "c809a39489b9088b5d9fb38481090850",
+    "hash": "8fc0ed100b7150566d63f1a2a28a2686",
+    "content-hash": "3f69381bea6571f9aa4ed4feecccc29c",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -67,6 +67,62 @@
                 "yii2"
             ],
             "time": "2015-04-02 11:48:05"
+        },
+        {
+            "name": "2amigos/yii2-qrcode-helper",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-qrcode-helper.git",
+                "reference": "827a79d0e498026119c8cdcf724d81be2e0daa5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-qrcode-helper/zipball/827a79d0e498026119c8cdcf724d81be2e0daa5f",
+                "reference": "827a79d0e498026119c8cdcf724d81be2e0daa5f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\qrcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create QrCodes based on libqrencode C library.",
+            "keywords": [
+                "2amigos",
+                "extension",
+                "helper",
+                "qrcode",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-03-16 21:26:14"
         },
         {
             "name": "bower-asset/bootstrap",
