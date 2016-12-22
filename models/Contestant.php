@@ -31,7 +31,7 @@ class Contestant extends ActiveRecord
             ->from('vote_contestant')
             ->join('LEFT JOIN','vote_item','vote_item.itemId=vote_contestant.itemId')
             ->where(1)
-            ->orderBy('vote_item.itemId,sortNum');
+            ->orderBy('vote_contestant.createTime desc');
         if(!empty($where)){
             //拼接搜索条件
             if(isset($where['contestantName'])){
