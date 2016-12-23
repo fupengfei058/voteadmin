@@ -54,8 +54,8 @@ class ItemController extends SiteController
 
     public function actionQrcode()
     {
-        if($_POST['itemId']){
-            $url = $_POST['itemId'].\Yii::$app->params['hostSuffix'];
+        if($_GET['itemId']){
+            $url = $_GET['itemId'].\Yii::$app->params['hostSuffix'];
             return QrCode::png($url,false,0,5);
         }
     }

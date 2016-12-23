@@ -64,7 +64,7 @@
                     链接地址：<span id="link"></span><?=\Yii::$app->params['hostSuffix']?>
                 </p>
                 <p>
-                    二维码：<div id="qrcode"></div><!--<img id="qrcode" src="<?/*= Url::to(['item/qrcode'])*/?>">-->
+                    二维码：<img id="qrcode">
                 </p>
             </div>
             <div class="modal-footer">
@@ -74,18 +74,11 @@
     </div>
 </div>
 <?php $this->beginBlock('item') ?>
-$(".itemModal").click(function(){
-    var itemId = $(this).attr("itemId");
-    $("#link").text(itemId);
-    $.ajax(function(){
-        url:'./index.php?r=item/qrcode',
-        type:'post',
-        dataType:'json',
-        data:{itemId:itemId},
-        success:function(data){
-            $("#qrcode").html('<img src="+data+">');
-        }
+    $(".itemModal").click(function(){
+        var itemId = $(this).attr("itemId");
+        $("#link").text(itemId);
+        var wholeLink = "./index.php?r=item/qrcode&itemId="+itemId;
+        $("#qrcode").attr("src", wholeLink);
     });
-});
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks['item']); ?>

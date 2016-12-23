@@ -13,7 +13,7 @@ class Contestant extends ActiveRecord
 
     public static function contestantCount($itemId)
     {
-        return Yii::$app->db->createCommand("SELECT COUNT(*) FROM vote_contestant where itemId=$itemId")->queryScalar();
+        return Yii::$app->db->createCommand("SELECT COUNT(*) FROM vote_contestant where itemId=$itemId and reviewState=1")->queryScalar();
     }
 
     public function rules()
